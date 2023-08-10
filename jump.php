@@ -26,53 +26,11 @@ if ($found) {
         <meta charset="UTF-8">
         <title>WhaleBlue ShortLink ID: <?php echo $urlString; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body {
-                background-color: #f5f5f5;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                margin: 0 20px;
-            }
-            
-            .card {
-                background-color: white;
-                width: 90%;
-                max-width: 400px;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                text-align: center;
-            }
-            
-            .title {
-                font-size: 28px;
-                color: #2369F5;
-                margin-bottom: 10px;
-            }
-            
-            .content {
-                color: #000000;
-                margin-bottom: 20px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            
-            .continue-button {
-                background-color: #2369F5;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        </style>
+        <link rel="stylesheet" href="/css/main-styles.css">
     </head>
     <body>
         <div class="card">
-            <div class="title">WhaleBlue ShortLink</div>
+            <h1 class="title">WhaleBlue ShortLink</h1>
             <div class="content">
                 即将前往第三方网页，该链接由用户提交，请注意您的账号财产安全:<br>
                 <span style="color: #97A4B7;"><?php echo $url; ?><hr></span>
@@ -95,6 +53,6 @@ if ($found) {
     <title>错误页面</title>
 </head>
 <body>
-    <h1>参数错误，请检查生成的链接是否正确</h1>
+    <h1>参数错误，请检查 URLID 是否正确</h1>
 </body>
 </html>
