@@ -4,6 +4,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     echo '<head>';
     echo '<title>WhaleBlue ShortLink</title>';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    echo '<link rel="stylesheet" href="/css/main-yiyan.css">';
+    echo '<script src="/js/main-yiyan.js"></script>';
     echo '<link rel="stylesheet" href="/css/main-styles.css">';
     echo '</head>';
     echo '<body>';
