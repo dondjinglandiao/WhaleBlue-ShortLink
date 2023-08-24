@@ -1,22 +1,47 @@
 <?php
 $requestedString = trim($_SERVER['PATH_INFO'], '/');
+$domain = $_SERVER['HTTP_HOST'];
 
-$file = fopen('data/url.txt', 'r');
+require __DIR__ . '/data/databasemode.php';
+$ModeIF = $mode == "file";
+
 $found = false;
-$url = '';
+
+if ($ModeIF) {
+    $file = fopen('data/url.txt', 'r');
+    $url = '';
 
 while (($line = fgets($file)) !== false) {
     $data = explode(' ', $line);
     $urlString = trim($data[0]);
     $url = trim($data[1]);
+    
+        if ($requestedString === $urlString) {
+            $found = true;
+            break;
+        }
+    }
 
-    if ($requestedString === $urlString) {
+    fclose($file);
+} else {
+    $file = __DIR__ .  '/api/data/code.json';
+    $data = file_get_contents($file);
+    $json = json_decode($data, true);
+    $code = $json['code'];
+    $apiurl = "https://$domain/api/?mode=output&random=$requestedString&longurl=&ip=&code=$code";
+    $opts = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false
+        )
+    );
+    $context = stream_context_create($opts);
+    $url = file_get_contents($apiurl, false, $context);
+
+    if ($url !== 'No data found') {
         $found = true;
-        break;
     }
 }
-
-fclose($file);
 
 if ($found) {
     ?>
@@ -24,7 +49,7 @@ if ($found) {
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>WhaleBlue ShortLink ID: <?php echo $urlString; ?></title>
+        <title>WhaleBlue ShortLink ID: <?php echo $requestedString; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/main-yiyan.css">
         <script src="/js/main-yiyan.js"></script>
